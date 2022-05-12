@@ -1,10 +1,10 @@
+# Cache
+./notebooks/.ipynb_checkpoints
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
-*.so
 
 # Distribution / packaging
 .Python
@@ -75,7 +75,7 @@ docs/_build/
 target/
 
 # Jupyter Notebook
-.ipynb_checkpoints
+notebooks/.ipynb_checkpoints
 
 # IPython
 profile_default/

@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+  spark-master:
+    build: .
+    restart: unless-stopped
+    ports:
+      - 4040:4040
+      - 7077:7077
+      - 8090:8090
+      - 18080:18080
+    command: sh spark-master.sh
+    volumes:
+      - ./apps:/data/spark-apps
+      - ./data:/data/spark-data
+  spark-worker:
+    build: .
+    deploy:
+      replicas: 3
+    restart: unless-stopped
+    command: sh spark-worker.sh
+    volumes:
+      - ./apps:/data/spark-apps
+      - ./data:/data/spark-data
