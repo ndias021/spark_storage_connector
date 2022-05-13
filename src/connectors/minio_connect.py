@@ -28,5 +28,17 @@ class MinioConnector(ConnectorI):
         fetch_info = fetch_model
         bucket_name = fetch_info["bucket_name"]
         bucket_file_path = fetch_info["bucket_file_path"]
-        df = self.spark.read.csv(f"s3a://{bucket_name}/{bucket_file_path}")
+        df = self.spark.read.format("csv").\
+            option("header", "true").\
+            load(f"s3a://{bucket_name}/{bucket_file_path}")
+        return df
+
+    def save(self, save_model):
+        self._connect()
+        save_info = save_model
+        bucket_name = save_info["bucket_name"]
+        bucket_file_path = save_info["bucket_file_path"]
+        df = self.spark.read.format("csv"). \
+            option("header", "true"). \
+            write(f"s3a://{bucket_name}/{bucket_file_path}")
         return df

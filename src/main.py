@@ -1,4 +1,6 @@
-from helpers.minio_connect import MinioConnector
+import logging
+
+from connectors.minio_connect import MinioConnector
 
 config = {
     "endpoint": "http://localhost:9000",
@@ -15,4 +17,5 @@ fetch_info = {
 df = mc.fetch(fetch_model=fetch_info)
 print(df.show(2))
 
-print("Done")
+logging.info("Done")
+
