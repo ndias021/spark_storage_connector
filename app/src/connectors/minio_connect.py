@@ -32,13 +32,3 @@ class MinioConnector(ConnectorI):
             option("header", "true").\
             load(f"s3a://{bucket_name}/{bucket_file_path}")
         return df
-
-    def save(self, save_model):
-        self._connect()
-        save_info = save_model
-        bucket_name = save_info["bucket_name"]
-        bucket_file_path = save_info["bucket_file_path"]
-        df = self.spark.read.format("csv"). \
-            option("header", "true"). \
-            write(f"s3a://{bucket_name}/{bucket_file_path}")
-        return df
